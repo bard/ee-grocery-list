@@ -8,12 +8,13 @@
     "lint": "eslint --cache --max-warnings=0 src",
     "test": "jest",
     "test:watch": "jest --watch --notify",
-    "prepare": "husky install",
     "build": "tsc"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/jest": "^26.0.5",
     "@types/node": "^14.0.23",
+    "@types/node-fetch": "2",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "esbuild": "^0.13.12",
@@ -25,6 +26,7 @@
     "husky": "^6.0.0",
     "jest": "^27.3.1",
     "lint-staged": ">=10",
+    "node-fetch": "2",
     "node-notifier": "^10.0.0",
     "prettier": "^2.0.5",
     "tsc-watch": "^4.2.9",
@@ -38,6 +40,8 @@
     "node": ">=14"
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1"
   }
 }
