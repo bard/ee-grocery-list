@@ -1,0 +1,11 @@
+{
+  "name": "monorepo",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start:dev:docker": "UID_GID=$(id -u):$(id -g) docker-compose -f docker-compose.dev.yaml up",
+    "stop:dev:docker": "UID_GID=$(id -u):$(id -g) docker-compose -f docker-compose.dev.yaml down",
+    "lint": "yarn --cwd services/frontend lint && yarn --cwd services/api lint",
+    "test": "yarn --cwd services/frontend test && yarn --cwd services/api test"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "starter-node-basic",
+  "private": true,
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start:dev": "tsc-watch --onSuccess 'node --enable-source-maps -r dotenv/config dist/index.js'",
+    "lint": "eslint --cache --max-warnings=0 src",
+    "test": "jest",
+    "test:watch": "jest --watch --notify",
+    "prepare": "husky install",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.5",
+    "@types/node": "^14.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "esbuild": "^0.13.12",
+    "esbuild-jest": "^0.5.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^6.0.0",
+    "jest": "^27.3.1",
+    "lint-staged": ">=10",
+    "node-notifier": "^10.0.0",
+    "prettier": "^2.0.5",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^4.2.3"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix",
+    "*.{js,ts,css,md}": "prettier --write"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
