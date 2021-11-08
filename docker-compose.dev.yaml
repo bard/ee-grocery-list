@@ -30,7 +30,7 @@ services:
     volumes:
       - "./services/frontend:/app/services/frontend"
     environment:
-      - "PROXIED_PORT=80"
+      - "HMR_PORT=80"
     labels:
       - "traefik.http.routers.frontend.rule=HostRegexp(`myapp.127-0-0-1.nip.io`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=3000"

@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     strictPort: true,
+    port: process.env.PORT ? parseInt(process.env.PORT) : undefined,
     hmr: {
-      port: process.env.PROXIED_PORT
-        ? parseInt(process.env.PROXIED_PORT)
-        : undefined,
+      // explicit hmr port when running behind reverse proxy
+      port: process.env.HMR_PORT ? parseInt(process.env.HMR_PORT) : undefined,
     },
   },
 })
