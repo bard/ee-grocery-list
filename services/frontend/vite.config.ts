@@ -11,5 +11,9 @@ export default defineConfig({
       // explicit hmr port when running behind reverse proxy
       port: process.env.HMR_PORT ? parseInt(process.env.HMR_PORT) : undefined,
     },
+
+    proxy: process.env.API_HOST
+      ? { '/api': { target: process.env.API_HOST } }
+      : undefined,
   },
 })

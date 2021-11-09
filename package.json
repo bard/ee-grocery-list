@@ -6,6 +6,9 @@
     "start:dev:docker": "UID_GID=$(id -u):$(id -g) docker-compose -f docker-compose.dev.yaml up",
     "stop:dev:docker": "UID_GID=$(id -u):$(id -g) docker-compose -f docker-compose.dev.yaml down",
     "lint": "yarn --cwd services/frontend lint && yarn --cwd services/api lint",
-    "test": "yarn --cwd services/frontend test && yarn --cwd services/api test"
+    "test": "yarn --cwd services/frontend test && yarn --cwd services/api test",
+    "install:all": "yarn --cwd services/frontend install && yarn --cwd services/api install",
+    "start:dev:api": "PORT=4000 yarn --cwd services/api start:dev",
+    "start:dev:frontend": "API_HOST=http://localhost:4000 PORT=3000 yarn --cwd services/frontend start:dev"
   }
 }
