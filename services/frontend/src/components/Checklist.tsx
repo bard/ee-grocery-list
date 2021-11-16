@@ -21,6 +21,12 @@ export const Checklist: React.FC<{
   const [items, setItems] = useState(initialItems)
   const [isEnteringNewItem, setIsEnteringNewItem] = useState(false)
   const [newItemTitle, setNewItemTitle] = useState<string>('')
+  // TODO factor out total for display outside
+  const [total, setTotal] = useState(0)
+
+  const updateTotal = () => {
+    setTotal(items.reduce((acc, item) => acc + (item.price ?? 0), 0))
+  }
 
   const handleBeginEnteringNewItem = () => {
     setIsEnteringNewItem(true)
@@ -29,6 +35,7 @@ export const Checklist: React.FC<{
   const handleRemove = (index: number) => {
     const newItems = items.filter((item, i) => i !== index)
     setItems(newItems)
+    updateTotal()
     if (onUpdate) onUpdate(newItems)
   }
 
@@ -38,7 +45,10 @@ export const Checklist: React.FC<{
   }
 
   const handleAcceptNewItem = () => {
-    const newItems = [...items, { title: newItemTitle, checked: false }]
+    const newItems = [
+      ...items,
+      { title: newItemTitle, checked: false, price: null },
+    ]
     setItems(newItems)
     setNewItemTitle('')
     setIsEnteringNewItem(false)
@@ -52,7 +62,27 @@ export const Checklist: React.FC<{
       index === i ? { ...item, checked: !item.checked } : item,
     )
     setItems(newItems)
+    updateTotal()
     if (onUpdate) onUpdate(newItems)
+  }
+
+  const handlePriceChange = (index: number, input: string) => {
+    // TODO validate input according also to locale
+
+    const parsedPrice = input.trim() === '' ? null : parseInt(input, 10)
+
+    setItems((items) =>
+      items.map((item, i) =>
+        i === index
+          ? {
+              ...item,
+              price: parsedPrice,
+            }
+          : item,
+      ),
+    )
+
+    updateTotal()
   }
 
   return (
@@ -73,6 +103,11 @@ export const Checklist: React.FC<{
             >
               {item.title}
             </Text>
+            <Input
+              data-testid={'price-' + i}
+              onChange={(e) => handlePriceChange(i, e.target.value)}
+              value={item.price === null ? '' : item.price}
+            />
             <IconButton
               aria-label="Remove"
               onClick={() => handleRemove(i)}
@@ -107,6 +142,10 @@ export const Checklist: React.FC<{
           </HStack>
         </ListItem>
       )}
+
+      <ListItem>
+        <Text data-testid="total">{total}</Text>
+      </ListItem>
 
       <ListItem>
         <Button isFullWidth onClick={handleBeginEnteringNewItem}>

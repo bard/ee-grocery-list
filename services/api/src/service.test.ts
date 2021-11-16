@@ -44,9 +44,9 @@ describe('/api', () => {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({
           groceries: [
-            { checked: true, title: 'Fruit' },
-            { checked: true, title: 'Milk' },
-            { checked: true, title: 'Peanut Butter' },
+            { checked: true, title: 'Fruit', price: null },
+            { checked: true, title: 'Milk', price: 1.25 },
+            { checked: true, title: 'Peanut Butter', price: 2 },
           ],
         }),
       })
@@ -59,9 +59,9 @@ describe('/api', () => {
 
       expect(await resGet.json()).toEqual({
         groceries: [
-          { checked: true, title: 'Fruit' },
-          { checked: true, title: 'Milk' },
-          { checked: true, title: 'Peanut Butter' },
+          { checked: true, title: 'Fruit', price: null },
+          { checked: true, title: 'Milk', price: 1.25 },
+          { checked: true, title: 'Peanut Butter', price: 2 },
         ],
       })
     })

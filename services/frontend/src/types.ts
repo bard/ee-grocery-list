@@ -1,1 +1,5 @@
-export type GroceryItems = Array<{ checked: boolean; title: string }>
+export type GroceryItems = Array<{
+  checked: boolean
+  title: string
+  price: null | number
+}>
